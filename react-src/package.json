@@ -10,9 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@apache-arrow/ts": "^13.0.0",
+    "@duckdb/duckdb-wasm": "1.27.1-dev120.0",
     "@neutralinojs/lib": "^3.12.0",
+    "ag-grid-community": "^30.1.0",
+    "ag-grid-react": "^30.1.0",
+    "echarts": "^5.4.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-select": "^5.7.5",
+    "react-sortable-hoc": "^2.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

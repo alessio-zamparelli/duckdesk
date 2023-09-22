@@ -25,7 +25,7 @@
     "binaryName": "duckdesk",
     "resourcesPath": "/react-src/dist/",
     "extensionsPath": "/extensions/",
-    "clientLibrary": "/react-src/public/js/neutralino.js",
+    "clientLibrary": "/public/neutralino.js",
     "binaryVersion": "4.10.0",
     "clientVersion": "3.8.2",
     "frontendLibrary": {
