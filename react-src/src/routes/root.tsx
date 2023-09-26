@@ -87,7 +87,7 @@ export default function Root() {
 									isActive ? "active" : isPending ? "pending" : ""
 								}
 							>
-								<li>demo1</li>
+								demo1
 							</NavLink>
 						</li>
 
@@ -102,7 +102,7 @@ export default function Root() {
 							</NavLink>
 						</li>
 
-						{contacts.length ? (
+						{/* {contacts.length ? (
 							contacts.map((contact) => (
 								<li key={contact.id}>
 									<NavLink
@@ -126,7 +126,7 @@ export default function Root() {
 							<p>
 								<i>No contacts</i>
 							</p>
-						)}
+						)} */}
 					</ul>
 				</nav>
 			</div>

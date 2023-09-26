@@ -42,7 +42,7 @@ import { Item } from "./Item"
 import { Container } from "./Container"
 import type { ContainerProps } from "./Container"
 
-import { createRange, coordinateGetter as multipleContainersCoordinateGetter } from "./helpers"
+import { coordinateGetter as multipleContainersCoordinateGetter } from "./helpers"
 
 const animateLayoutChanges: AnimateLayoutChanges = (args) => defaultAnimateLayoutChanges({ ...args, wasDragging: true })
 
@@ -222,11 +222,11 @@ function SortableItem({
 	)
 }
 
-type Items = Record<UniqueIdentifier, UniqueIdentifier[]>
+export type DnDItems = Record<UniqueIdentifier, UniqueIdentifier[]>
 
-interface Props {
-	items: Items
-	setItems: Dispatch<SetStateAction<Items>>
+export interface DnDProps {
+	items: DnDItems
+	setItems: Dispatch<SetStateAction<DnDItems>>
 	adjustScale?: boolean
 	cancelDrop?: CancelDrop
 	columns?: number
@@ -252,13 +252,13 @@ interface Props {
 	trashable?: boolean
 	scrollable?: boolean
 	vertical?: boolean
+	extraColumn?: boolean
 }
 
 export default function DnD({
-	items: initialItems,
+	items,
 	setItems,
 	adjustScale = false,
-	itemCount = 3,
 	cancelDrop,
 	columns,
 	handle = false,
@@ -272,18 +272,9 @@ export default function DnD({
 	strategy = verticalListSortingStrategy,
 	trashable = false,
 	vertical = false,
+	extraColumn = false,
 	scrollable,
-}: Props) {
-	const [items, setItems] = useState<Items>(
-		() =>
-			initialItems ?? {
-				A: createRange(itemCount, (index) => `A${index + 1}`),
-				B: createRange(itemCount, (index) => `B${index + 1}`),
-				C: createRange(itemCount, (index) => `C${index + 1}`),
-				D: createRange(itemCount, (index) => `D${index + 1}`),
-			}
-	)
-
+}: DnDProps) {
 	const [containers, setContainers] = useState(Object.keys(items) as UniqueIdentifier[])
 	const [activeId, setActiveId] = useState<UniqueIdentifier | null>(null)
 	const lastOverId = useRef<UniqueIdentifier | null>(null)
@@ -353,7 +344,7 @@ export default function DnD({
 		},
 		[activeId, items]
 	)
-	const [clonedItems, setClonedItems] = useState<Items | null>(null)
+	const [clonedItems, setClonedItems] = useState<DnDItems | null>(null)
 	const sensors = useSensors(
 		useSensor(MouseSensor),
 		useSensor(TouchSensor),
@@ -652,7 +643,7 @@ export default function DnD({
 							</SortableContext>
 						</DroppableContainer>
 					))}
-					{minimal ? undefined : (
+					{minimal || !extraColumn ? undefined : (
 						<DroppableContainer
 							id={PLACEHOLDER_ID}
 							disabled={isSortingContainer}

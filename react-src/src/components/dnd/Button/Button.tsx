@@ -1,7 +1,7 @@
 import React, { forwardRef, CSSProperties } from "react"
 import clsx from "clsx"
 
-import styles from "./Button.module.css"
+import styles from "./Button.module.scss"
 
 export interface Props extends React.HTMLAttributes<HTMLButtonElement> {
 	active?: {

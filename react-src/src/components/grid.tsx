@@ -7,7 +7,7 @@ import {
 	MouseEventHandler,
 } from "react"
 
-import { AgGridReact } from "ag-grid-react" // the AG Grid React Component
+import { AgGridReact, AgGridReactProps } from "ag-grid-react" // the AG Grid React Component
 
 import "ag-grid-community/styles/ag-grid.css" // Core grid CSS, always needed
 import "ag-grid-community/styles/ag-theme-alpine.css" // Optional theme CSS
@@ -20,9 +20,10 @@ export interface IGrid {
 export default function Grid({ rowData, columnDefs }: IGrid) {
 	const gridRef = useRef<AgGridReact>(null)
 
-	const defaultColDef = useMemo(
+	const defaultColDef = useMemo<AgGridReactProps["defaultColDef"]>(
 		() => ({
 			sortable: true,
+			filter: true,
 		}),
 		[]
 	)
@@ -32,13 +33,10 @@ export default function Grid({ rowData, columnDefs }: IGrid) {
 		console.log("cellClicked", event)
 	}, [])
 
-	const buttonListener = useCallback<MouseEventHandler<HTMLButtonElement>>(
-		(e) => {
-			e.preventDefault()
-			gridRef.current?.api.deselectAll()
-		},
-		[]
-	)
+	const buttonListener = useCallback<MouseEventHandler<HTMLButtonElement>>((e) => {
+		e.preventDefault()
+		gridRef.current?.api.deselectAll()
+	}, [])
 
 	return (
 		<div className="h-full w-full">

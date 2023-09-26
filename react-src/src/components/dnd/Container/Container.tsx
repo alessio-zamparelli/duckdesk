@@ -4,7 +4,7 @@ import clsx from "clsx"
 import { Handle } from "../Handle"
 import { Remove } from "../Remove"
 
-import styles from "./Container.module.css"
+import styles from "./Container.module.scss"
 
 export interface Props {
 	children: React.ReactNode
